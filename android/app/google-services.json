@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "334231907643",
+    "project_id": "elimikanasisi",
+    "storage_bucket": "elimikanasisi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334231907643:android:0132a0723bc858a8bf9b1e",
+        "android_client_info": {
+          "package_name": "tz.ac.udom.guidance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334231907643-5lpdu7pr8d996b7rg2vq5kf56gepcdsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9fNGKc1ncqTNT3iEJORtpkcitVOkt8X4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334231907643-5lpdu7pr8d996b7rg2vq5kf56gepcdsv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
