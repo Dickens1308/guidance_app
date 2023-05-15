@@ -36,6 +36,30 @@ class AuthService {
     }
   }
 
+  Future<String> resetPassword(String email) async {
+    String url = Api.RESET_USER_PASSWORD;
+    Uri uri = Uri.parse(url);
+
+    final response = await http.post(
+      uri,
+      headers: {
+        "accept": "application/json",
+      },
+      body: {'email': email},
+    );
+
+    if (kDebugMode) {
+      print("Reset user $url");
+      print(response.body);
+    }
+
+    if (response.statusCode == 200) {
+      return await jsonDecode(response.body)['message'];
+    } else {
+      throw Exception(jsonDecode(response.body)['message']);
+    }
+  }
+
   Future<AppUser?> signUp(
       String username, String email, String password) async {
     String url = Api.REGISTER_USER;

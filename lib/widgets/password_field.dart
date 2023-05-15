@@ -5,64 +5,66 @@ class PasswordFieldForm extends StatelessWidget {
       {Key? key,
         required this.controller,
         required this.viewPassword,
-        required this.function})
+        required this.function, required this.focusNode})
       : super(key: key);
   final TextEditingController controller;
   final bool viewPassword;
   final Function function;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 30),
-      child: TextFormField(
-        keyboardType: TextInputType.visiblePassword,
-        obscureText: viewPassword,
-        controller: controller,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (input) => input!.length < 4
-            ? "Password length should have more than 4 characters"
-            : null,
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-        decoration: InputDecoration(
-          hintText: "Enter your password",
-          labelText: "Password",
-          labelStyle: const TextStyle(
-            fontSize: 24,
-            color: Colors.white54,
-          ),
-          hintStyle: const TextStyle(
-            color: Colors.white54,
-          ),
-          prefixIcon: const Icon(
-            Icons.lock,
+    return GestureDetector(
+      onTap: () {
+        focusNode.requestFocus();
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: TextFormField(
+          keyboardType: TextInputType.visiblePassword,
+          textInputAction: TextInputAction.done,
+          obscureText: viewPassword,
+          controller: controller,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (input) => input!.length < 4
+              ? "Password length should have more than 4 characters"
+              : null,
+          style: const TextStyle(
             color: Colors.white,
           ),
-          suffixIcon: IconButton(
-            onPressed: () => function(),
-            icon: Icon(
-              viewPassword ? Icons.visibility_off : Icons.visibility,
+          decoration: InputDecoration(
+            hintText: "Enter your password",
+            labelText: "Password",
+            labelStyle: const TextStyle(
+              fontSize: 24,
               color: Colors.white,
             ),
+            hintStyle: const TextStyle(
+              color: Colors.white54,
+            ),
+            suffixIcon: Padding(
+              padding: const EdgeInsets.only(top: 19),
+              child: IconButton(
+                onPressed: () => function(),
+                icon: Icon(
+                  viewPassword ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            focusedBorder: buildOutlineInputBorder(),
+            enabledBorder: buildOutlineInputBorder(),
+            border: buildOutlineInputBorder(),
           ),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          focusedBorder: buildOutlineInputBorder(),
-          enabledBorder: buildOutlineInputBorder(),
-          border: buildOutlineInputBorder(),
         ),
       ),
     );
   }
 
-  OutlineInputBorder buildOutlineInputBorder() {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(
-        color: Colors.white54,
-      ),
-      gapPadding: 10,
+  UnderlineInputBorder buildOutlineInputBorder() {
+    return const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.white),
     );
   }
 }

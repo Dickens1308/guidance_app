@@ -60,6 +60,7 @@ flutter:
     - assets/images/
     - assets/images/profile.png
     - assets/svg/books-svgrepo-com.svg
+    - assets/svg/blob-haikei.svg
     - assets/svg/books-book-svgrepo-com.svg
     - assets/svg/achievement-challenge-medal-svgrepo-com.svg
     - assets/svg/challenge-environment-flag-forest-hill-mountain-svgrepo-com.svg

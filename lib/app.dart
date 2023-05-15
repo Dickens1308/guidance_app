@@ -14,6 +14,7 @@ import 'screens/parent_home.dart';
 import 'screens/questions_list.dart';
 import 'screens/register.dart';
 import 'screens/register_student.dart';
+import 'screens/reset_password.dart';
 import 'screens/results.dart';
 import 'screens/splash.dart';
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       restorationScopeId: 'app',
       theme: ThemeData(
         primarySwatch: _primarySwatch,
-        scaffoldBackgroundColor: const Color(0xff152238),
+        scaffoldBackgroundColor: const Color(0xff376577),
         textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
       ),
       home: const SplashScreen(),
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
                 return const LoginScreen();
               case RegisterScreen.routeName:
                 return const RegisterScreen();
+              case ResetPassword.routeName:
+                return const ResetPassword();
               case ParentHome.routeName:
                 return const ParentHome();
               case RegisterStudent.routeName:

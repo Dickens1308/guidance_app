@@ -7,6 +7,7 @@ class Api {
   static const GET_ALL_COURSES = '$BASE/language/courses';
   static const GET_ALL_LANG = '$BASE/language/';
   static const LOGIN_USER = '$BASE/auth/login';
+  static const RESET_USER_PASSWORD = '$BASE/auth/reset/password';
   static const REGISTER_USER = '$BASE/auth/register';
   static const REGISTER_STUDENT = '$BASE/child/register';
   static const LOGOUT_USER = '$BASE/auth/logout';

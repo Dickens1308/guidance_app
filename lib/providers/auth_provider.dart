@@ -35,7 +35,7 @@ class AuthProvider extends ChangeNotifier {
       bool isConnected = await connectionState.checkConnection();
 
       if (!isConnected) {
-       flutterToastFun('Check you internet connection!', Colors.red);
+        flutterToastFun('Check you internet connection!', Colors.red);
       }
 
       AppUser? appUser =
@@ -110,6 +110,47 @@ class AuthProvider extends ChangeNotifier {
       setIsLogged(false);
       setIsLoading(false);
       flutterToastFun(errorMessage, Colors.red);
+    }
+  }
+
+  String _message = '';
+
+  String get message => _message;
+
+  setMessage(String value) {
+    _message = value;
+    notifyListeners();
+  }
+
+  Future<bool> resetPassword(String email, BuildContext context) async {
+    setIsLoading(true);
+
+    try {
+      bool isConnected = await connectionState.checkConnection();
+
+      if (!isConnected) {
+        Fluttertoast.showToast(
+          msg: "Check you internet connection!",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
+
+      String? message = isConnected ? await authService.resetPassword(email) : null;
+      setIsLoading(false);
+      setMessage(message??'');
+      return true;
+    } catch (e) {
+      setErrorMessage(e.toString());
+      setIsLogged(false);
+      setIsLoading(false);
+      flutterToastFun("Failed to reset this user account", Colors.red);
+
+      return false;
     }
   }
 

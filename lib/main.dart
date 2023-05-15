@@ -8,11 +8,12 @@ import 'providers/course_provider.dart';
 import 'providers/question_provider.dart';
 
 void main() async {
+  Paint.enableDithering = true;
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.white,
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: Color(0xff152238),
       systemNavigationBarIconBrightness: Brightness.dark,
       systemNavigationBarDividerColor: Color(0xff152238),

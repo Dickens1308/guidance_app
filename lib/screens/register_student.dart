@@ -23,6 +23,10 @@ class _RegisterStudentState extends State<RegisterStudent> {
       TextEditingController(text: 'dickens.anthony@gmail.com');
   final _passwordController = TextEditingController(text: 'password');
 
+  final focusNodeU = FocusNode();
+  final focusNodeE = FocusNode();
+  final focusNodeP = FocusNode();
+
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   bool viewPassword = true;
 
@@ -51,9 +55,15 @@ class _RegisterStudentState extends State<RegisterStudent> {
                         child: Column(
                           children: [
                             const SizedBox(height: 100),
-                            UsernameFieldForm(controller: _usernameController),
+                            UsernameFieldForm(
+                              controller: _usernameController,
+                              focusNode: focusNodeU,
+                            ),
                             const SizedBox(height: 10),
-                            EmailFieldForm(controller: _emailController),
+                            EmailFieldForm(
+                              controller: _emailController,
+                              focusNode: focusNodeE,
+                            ),
                             const SizedBox(height: 10),
                             PasswordFieldForm(
                               controller: _passwordController,
@@ -63,6 +73,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                                   viewPassword = !viewPassword;
                                 });
                               },
+                              focusNode: focusNodeP,
                             ),
                           ],
                         ),
