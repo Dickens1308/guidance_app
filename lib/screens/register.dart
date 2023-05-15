@@ -95,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 20),
+                                        padding: const EdgeInsets.only(top: 30),
                                         child: Text(
                                           'Welcome to',
                                           style: Theme.of(context)
@@ -167,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           Positioned(
                             left: 0,
-                            top: 250,
+                            top: 260,
                             child: Container(
                               height: 100,
                               width: 100,
