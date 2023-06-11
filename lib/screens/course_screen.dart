@@ -11,7 +11,7 @@ import '../models/language.dart';
 import '../providers/course_provider.dart';
 import '../widgets/dots_widget.dart';
 import '../widgets/screen_loader.dart';
-import 'questions_list.dart';
+import 'topic_screen.dart';
 
 class CourseScreen extends StatefulWidget {
   const CourseScreen({Key? key, required this.language}) : super(key: key);
@@ -34,7 +34,7 @@ class _CourseScreenState extends State<CourseScreen> {
       CourseProvider provider =
           Provider.of<CourseProvider>(context, listen: false);
 
-      await provider.getAllCourse(context, num.parse(widget.language.id!));
+      await provider.getAllCourse(context, widget.language.id);
       countAllCourseCompleted(provider);
     });
   }
@@ -67,18 +67,19 @@ class _CourseScreenState extends State<CourseScreen> {
                                   'assets/json/59344-congratulation-badge-animation.json',
                                   height: size.height * .25,
                                 ),
-                          // const Positioned(
-                          //   right: 100,
-                          //   top: 58,
-                          //   child: Text(
-                          //     '0',
-                          //     style: TextStyle(
-                          //       fontWeight: FontWeight.bold,
-                          //       fontSize: 50,
-                          //       color: Colors.white,
-                          //     ),
-                          //   ),
-                          // ),
+                          if (count != provider.list.length)
+                            Positioned(
+                              right: 90,
+                              top: 50,
+                              child: Text(
+                                "${provider.list.length}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 50,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),
@@ -91,29 +92,40 @@ class _CourseScreenState extends State<CourseScreen> {
                         itemBuilder: (context, index) {
                           Course course = provider.list[index];
                           bool isCompleted = false;
+                          bool inProgress = false;
+                          bool isPrevCompleted = false;
 
-                          if (index > 0) {
-                            Course cs = provider.list[index - 1];
-                            isCompleted = cs.progressCount == cs.questionCount
-                                ? true
-                                : false;
+                          if (course.progressCount == course.topicsCount) {
+                            isCompleted = true;
                           }
 
-                          bool isFinished =
-                              course.progressCount == course.questionCount
-                                  ? true
-                                  : false;
+                          if (index != 0) {
+                            Course course2 = provider.list[index - 1];
+                            if (course2.progressCount == course2.topicsCount) {
+                              isPrevCompleted = true;
+                            }
+                          }
+
+                          if (course.progressCount > 0) {
+                            inProgress = true;
+                          }
 
                           return GestureDetector(
-                            onTap: () => courseFun(index, provider, course),
+                            onTap: () => courseFun(index, provider, course,
+                                isPrevCompleted, inProgress),
                             child: Column(
                               children: [
                                 const SizedBox(height: 10),
                                 Container(
                                   decoration: BoxDecoration(
-                                    color: (index == 0 || isCompleted)
-                                        ? Colors.deepPurpleAccent
-                                            .withOpacity(.3)
+                                    color: (index == 0 ||
+                                            inProgress ||
+                                            isPrevCompleted)
+                                        ? isCompleted
+                                            ? Colors.deepPurpleAccent
+                                                .withOpacity(.2)
+                                            : Colors.deepPurpleAccent
+                                                .withOpacity(.3)
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.circular(140),
                                   ),
@@ -126,8 +138,10 @@ class _CourseScreenState extends State<CourseScreen> {
                                       borderRadius: BorderRadius.circular(140),
                                     ),
                                     child: Icon(
-                                      (index == 0 || isCompleted)
-                                          ? isFinished
+                                      (inProgress ||
+                                              index == 0 ||
+                                              isPrevCompleted)
+                                          ? isCompleted
                                               ? Ionicons.checkmark
                                               : Ionicons.flash
                                           : Ionicons.lock_closed,
@@ -138,19 +152,19 @@ class _CourseScreenState extends State<CourseScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  course.title!,
+                                  course.title,
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                // Text(
-                                //   "${course.progressCount} / ${course.questionCount}",
-                                //   style: const TextStyle(
-                                //     color: Colors.white,
-                                //     fontWeight: FontWeight.w600,
-                                //   ),
-                                // ),
+                                Text(
+                                  "${course.progressCount} / ${course.topicsCount}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                                 const SizedBox(height: 20),
                               ],
                             ),
@@ -171,7 +185,7 @@ class _CourseScreenState extends State<CourseScreen> {
     count = 0;
     if (provider.list.isNotEmpty) {
       for (var element in provider.list) {
-        if (element.questionCount == element.progressCount) {
+        if (element.progressCount == element.topicsCount) {
           count++;
         }
       }
@@ -184,45 +198,59 @@ class _CourseScreenState extends State<CourseScreen> {
     }
   }
 
-  void courseFun(index, provider, course) async {
-    if (index > 0) {
-      Course courseCheck = provider.list[index - 1];
-      if (courseCheck.progressCount == courseCheck.questionCount) {
-        dynamic value = await Navigator.pushNamed(
-            context, QuestionListScreen.routeName,
-            arguments: course);
-
-        if (kDebugMode) {
-          print("Pop screen value is $value");
-        }
-        if (value != null && value == true) {
-          // ignore: use_build_context_synchronously
-          Provider.of<CourseProvider>(context, listen: false)
-              .getAllCourse(context, num.parse(widget.language.id!));
-
-          setState(() {});
-        }
-      } else {
-        Fluttertoast.showToast(
-          msg: "Finish the previous course before learning new course",
-          backgroundColor: Theme.of(context).primaryColor,
-        );
-      }
+  void courseFun(index, provider, course, isCompleted, inProgress) async {
+    if (index == 0 || inProgress || isCompleted) {
+      await Navigator.pushNamed(context, TopicScreen.routeName,
+              arguments: course)
+          .then((value) async {
+        await Provider.of<CourseProvider>(context, listen: false)
+            .getAllCourse(context, widget.language.id);
+      });
     } else {
-      dynamic value = await Navigator.pushNamed(
-          context, QuestionListScreen.routeName,
-          arguments: course);
-
-      if (kDebugMode) {
-        print("Pop screen value is $value");
-      }
-      if (value != null && value == true) {
-        // ignore: use_build_context_synchronously
-        Provider.of<CourseProvider>(context, listen: false)
-            .getAllCourse(context, num.parse(widget.language.id!));
-        countAllCourseCompleted(provider);
-        setState(() {});
-      }
+      Fluttertoast.showToast(
+        msg: "Finish the previous course before learning new course",
+        backgroundColor: Theme.of(context).primaryColor,
+      );
     }
+
+    // if (index > 0) {
+    //   Course courseCheck = provider.list[index - 1];
+    //   if (courseCheck.progressCount == courseCheck.questionCount) {
+    //     dynamic value = await Navigator.pushNamed(
+    //         context, QuestionListScreen.routeName,
+    //         arguments: course);
+    //
+    //     if (kDebugMode) {
+    //       print("Pop screen value is $value");
+    //     }
+    //     if (value != null && value == true) {
+    //       // ignore: use_build_context_synchronously
+    //       Provider.of<CourseProvider>(context, listen: false)
+    //           .getAllCourse(context, num.parse(widget.language.id!));
+    //
+    //       setState(() {});
+    //     }
+    //   } else {
+    //     Fluttertoast.showToast(
+    //       msg: "Finish the previous course before learning new course",
+    //       backgroundColor: Theme.of(context).primaryColor,
+    //     );
+    //   }
+    // } else {
+    //   dynamic value = await Navigator.pushNamed(
+    //       context, QuestionListScreen.routeName,
+    //       arguments: course);
+    //
+    //   if (kDebugMode) {
+    //     print("Pop screen value is $value");
+    //   }
+    //   if (value != null && value == true) {
+    //     // ignore: use_build_context_synchronously
+    //     Provider.of<CourseProvider>(context, listen: false)
+    //         .getAllCourse(context, num.parse(widget.language.id!));
+    //     countAllCourseCompleted(provider);
+    //     setState(() {});
+    //   }
+    // }
   }
 }

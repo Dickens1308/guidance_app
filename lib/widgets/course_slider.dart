@@ -21,13 +21,13 @@ class CourseSlider extends StatefulWidget {
 
 class _CourseSliderState extends State<CourseSlider> {
   CarouselController carouselController = CarouselController();
-  Course course = Course();
+  // Course course = Course();
   int activeIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    course = Provider.of<CourseProvider>(context, listen: false).list[0];
+    // course = Provider.of<CourseProvider>(context, listen: false).list[0];
   }
 
   @override
@@ -93,7 +93,7 @@ class _CourseSliderState extends State<CourseSlider> {
               onPageChanged: (index, carouselPageChangedReason) {
                 setState(() {
                   activeIndex = index;
-                  course = provider.list[index];
+                  // course = provider.list[index];
                 });
               }),
         ),
@@ -129,15 +129,15 @@ class _CourseSliderState extends State<CourseSlider> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
-                '${course.videosCount.toString()} videos',
-                style: Theme.of(context).textTheme.bodyLarge!.merge(
-                      const TextStyle(
-                        color: Colors.white60,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-              ),
+              // Text(
+              //   '${course.videosCount.toString()} videos',
+              //   style: Theme.of(context).textTheme.bodyLarge!.merge(
+              //         const TextStyle(
+              //           color: Colors.white60,
+              //           fontWeight: FontWeight.w400,
+              //         ),
+              //       ),
+              // ),
             ],
           ),
           Container(

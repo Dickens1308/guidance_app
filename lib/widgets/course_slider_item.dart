@@ -18,13 +18,13 @@ class CourseSliderItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        if (course.questionCount == course.progressCount) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, ResultScreen.routeName, (route) => false,
-              arguments: course);
-        } else {
-          Navigator.pushNamed(context, CourseTest.routeName, arguments: course);
-        }
+        // if (course.questionCount == course.progressCount) {
+        //   Navigator.pushNamedAndRemoveUntil(
+        //       context, ResultScreen.routeName, (route) => false,
+        //       arguments: course);
+        // } else {
+        //   Navigator.pushNamed(context, CourseTest.routeName, arguments: course);
+        // }
       },
       behavior: HitTestBehavior.opaque,
       child: Container(
@@ -66,51 +66,51 @@ class CourseSliderItem extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 10, top: 25),
-                height: size.height * .008,
-                width: double.infinity,
-                child: LinearPercentIndicator(
-                  width: size.width * .65,
-                  lineHeight: 10,
-                  barRadius: const Radius.circular(8),
-                  percent: course.progressCount! / course.questionCount!,
-                  backgroundColor: Colors.grey.shade300,
-                  progressColor: const Color(0xff152238),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              // Container(
+              //   margin: const EdgeInsets.only(left: 10, top: 25),
+              //   height: size.height * .008,
+              //   width: double.infinity,
+              //   child: LinearPercentIndicator(
+              //     width: size.width * .65,
+              //     lineHeight: 10,
+              //     barRadius: const Radius.circular(8),
+              //     percent: course.progressCount! / course.questionCount!,
+              //     backgroundColor: Colors.grey.shade300,
+              //     progressColor: const Color(0xff152238),
+              //   ),
+              // ),
+              const Padding(
+                padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Questions',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        text: "${course.progressCount}",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "/${course.questionCount}",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    // RichText(
+                    //   text: TextSpan(
+                    //     text: "${course.progressCount}",
+                    //     style: const TextStyle(
+                    //       fontWeight: FontWeight.bold,
+                    //       fontSize: 16,
+                    //       color: Colors.black,
+                    //     ),
+                    //     children: [
+                    //       TextSpan(
+                    //         text: "/${course.questionCount}",
+                    //         style: const TextStyle(
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 16,
+                    //           color: Colors.grey,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               )

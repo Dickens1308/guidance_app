@@ -8,10 +8,8 @@ class Question {
   String? choiceTwo;
   String? choiceThree;
   String? correctAnswer;
-  String? learningTitle;
-  String? learningDesc;
   String? codeImageUrl;
-  int? courseId;
+  int? topicId;
   List<Progress>? progress;
 
   Question({
@@ -23,10 +21,8 @@ class Question {
     this.choiceThree,
     this.correctAnswer,
     this.codeImageUrl,
-    this.courseId,
+    this.topicId,
     this.progress,
-    this.learningDesc,
-    this.learningTitle,
   });
 
   Question.fromJson(Map<String, dynamic> json) {
@@ -37,10 +33,8 @@ class Question {
     choiceTwo = json['choice_two'];
     choiceThree = json['choice_three'];
     correctAnswer = json['correct_answer'];
-    learningTitle = json['learning_title'];
-    learningDesc = json['learning_desc'];
     codeImageUrl = json['code_image_url'];
-    courseId = json['course_id'];
+    topicId = json['course_id'];
 
     if (json['progress'] != null) {
       progress = <Progress>[];

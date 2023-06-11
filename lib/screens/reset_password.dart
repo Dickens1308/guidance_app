@@ -154,7 +154,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           ),
                           Positioned(
                             left: 0,
-                            top: 250,
+                            top: 220,
                             child: Container(
                               height: 100,
                               width: 100,

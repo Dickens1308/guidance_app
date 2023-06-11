@@ -167,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           Positioned(
                             left: 0,
-                            top: 260,
+                            top: 230,
                             child: Container(
                               height: 100,
                               width: 100,

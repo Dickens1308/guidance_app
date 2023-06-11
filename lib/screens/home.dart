@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +6,6 @@ import '../providers/auth_provider.dart';
 import '../providers/course_provider.dart';
 import '../widgets/grid_tile_lan.dart';
 import '../widgets/screen_loader.dart';
-import 'course_videos.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -75,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(
                               height: size.height * .23,
                             ),
-                            buildLearningContent(context, size, provider)
+                            // buildLearningContent(context, size, provider)
                           ],
                         ),
                       ),
@@ -85,73 +83,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  buildLearningContent(
-      BuildContext context, Size size, CourseProvider provider) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        CourseVideo.routeName,
-        arguments: provider.list[0],
-      ),
-      behavior: HitTestBehavior.opaque,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: size.width * .7,
-                child: Text(
-                  'Learn Material',
-                  style: Theme.of(context).textTheme.headlineSmall!.merge(
-                        const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                '0 Materials',
-                style: Theme.of(context).textTheme.bodyLarge!.merge(
-                      const TextStyle(
-                        color: Colors.white60,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-              ),
-            ],
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white30,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20, right: 10, top: 7, bottom: 7),
-              child: Icon(
-                CupertinoIcons.play_arrow,
-                size: 40,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   SizedBox buildNoLanguage(Size size) {
     return SizedBox(
       height: size.height,
       width: size.width,
-      child: Center(
+      child: const Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'No Language found',
               style: TextStyle(

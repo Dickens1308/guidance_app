@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:guidance/models/question.dart';
 import 'package:guidance/providers/question_provider.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/course_question.dart';
@@ -135,8 +134,8 @@ class _CourseTestState extends State<CourseTest> {
                     child: CupertinoButton(
                       onPressed: () => nextBackFunction(provider, question),
                       color: provider.choice != null
-                          ? Colors.deepPurple.withOpacity(.8)
-                          : Colors.deepPurple.withOpacity(.3),
+                          ? Colors.black.withOpacity(.8)
+                          : Colors.black.withOpacity(.5),
                       borderRadius: BorderRadius.circular(8),
                       child: const Text(
                         'Submit',
@@ -156,12 +155,12 @@ class _CourseTestState extends State<CourseTest> {
     return SizedBox(
       height: size.height * .7,
       width: size.width,
-      child: Padding(
-        padding: const EdgeInsets.all(6),
+      child: const Padding(
+        padding: EdgeInsets.all(6),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               'No question found',
               style: TextStyle(
@@ -186,7 +185,8 @@ class _CourseTestState extends State<CourseTest> {
   }
 
   void nextBackFunction(QuestionProvider provider, Question question) async {
-    bool isAnswered = await provider.answerQuestionAndGoNext(context, question);
+    final isAnswered =
+        await provider.answerQuestionAndGoNext(context, question);
 
     if (isAnswered) {
       Navigator.of(context).pop(true);

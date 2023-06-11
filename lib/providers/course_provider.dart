@@ -37,11 +37,11 @@ class CourseProvider extends ChangeNotifier {
   }
 
   void updateCourseList(Course course) {
-    course.progressCount = course.progressCount! + 1;
-
-    if (kDebugMode) {
-      print(course.progressCount);
-    }
+    // course.progressCount = course.progressCount! + 1;
+    //
+    // if (kDebugMode) {
+    //   print(course.progressCount);
+    // }
     // _list[_list.indexWhere((cs) => cs.id == course.id)] = course;
     // notifyListeners();
   }
@@ -71,15 +71,21 @@ class CourseProvider extends ChangeNotifier {
   }
 
   Future<void> getAllCourse(BuildContext context, num number) async {
-    setLoading(true);
-    if (await connectionState.checkConnection()) {
-      List<Course> tempList = await courseService.getAllCourse(
-          context, number, (await getTokenPref()).toString());
-      setList(tempList);
+      setLoading(true);
+      if (await connectionState.checkConnection()) {
+        List<Course> tempList = await courseService.getAllCourse(
+            context, number, (await getTokenPref()).toString());
+        setList(tempList);
 
-      setLoading(false);
-    } else {
-      setLoading(false);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    try {
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 

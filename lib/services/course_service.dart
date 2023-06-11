@@ -81,7 +81,6 @@ class CourseService {
 
     List<Course> courseList = [];
 
-    try {
       final response = await http.get(
         uri,
         headers: {
@@ -101,17 +100,6 @@ class CourseService {
         List<Course> list =
             parsedListJson.map((e) => Course.fromJson(e)).toList();
 
-        Iterable parsedListJson2 =
-            await (jsonDecode(response.body)["languages"]) as List;
-
-        List<Language> list2 =
-            parsedListJson2.map((e) => Language.fromJson(e)).toList();
-
-        if (list2.isNotEmpty) {
-          Provider.of<CourseProvider>(context, listen: false)
-              .setLanguageList(list2);
-        }
-
         if (list.isNotEmpty) {
           courseList.addAll(list);
         }
@@ -125,11 +113,6 @@ class CourseService {
           print(response.body);
         }
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    }
 
     return courseList;
   }

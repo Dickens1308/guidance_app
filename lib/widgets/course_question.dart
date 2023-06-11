@@ -28,7 +28,7 @@ class CourseQuestion extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 30),
                 child: Text(
-                  '${question.title}?',
+                  '${question.title}',
                   style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 18,
@@ -37,13 +37,28 @@ class CourseQuestion extends StatelessWidget {
               ),
               if (question.codeImageUrl != null)
                 Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Center(
-                    child: Image.network(
-                      question.codeImageUrl!,
-                      height: size.height * .25,
-                      width: size.width * .7,
-                    ),
+                  padding: const EdgeInsets.only(top: 20, left: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                       Text(
+                        'Python Code',
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 20,
+
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        '${question.codeImageUrl}',
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 20,
+
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               const SizedBox(height: 30),
@@ -102,7 +117,9 @@ class CourseQuestion extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: provider.choice == position
-                    ?  provider.wrong ? Colors.red : const Color(0xff05e0f0)
+                    ? provider.wrong
+                        ? Colors.red
+                        : const Color(0xff05e0f0)
                     : error
                         ? Colors.red
                         : Colors.white70,

@@ -6,14 +6,15 @@ import 'app.dart';
 import 'providers/auth_provider.dart';
 import 'providers/course_provider.dart';
 import 'providers/question_provider.dart';
+import 'providers/topic_provider.dart';
 
 void main() async {
   Paint.enableDithering = true;
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
       systemNavigationBarColor: Color(0xff152238),
       systemNavigationBarIconBrightness: Brightness.dark,
       systemNavigationBarDividerColor: Color(0xff152238),
@@ -25,6 +26,9 @@ void main() async {
       providers: [
         ChangeNotifierProvider<AuthProvider>(
           create: (_) => AuthProvider(),
+        ),
+        ChangeNotifierProvider<TopicProvider>(
+          create: (_) => TopicProvider(),
         ),
         ChangeNotifierProvider<QuestionProvider>(
           create: (_) => QuestionProvider(),

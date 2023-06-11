@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:guidance/models/question.dart';
+import 'package:guidance/screens/learn_question.dart';
 
 import 'models/course.dart';
 import 'models/language.dart';
+import 'models/topic.dart';
 import 'screens/course_screen.dart';
 import 'screens/course_test.dart';
 import 'screens/course_videos.dart';
 import 'screens/home.dart';
-import 'screens/learn_question.dart';
 import 'screens/login.dart';
 import 'screens/parent_home.dart';
 import 'screens/questions_list.dart';
@@ -17,6 +18,7 @@ import 'screens/register_student.dart';
 import 'screens/reset_password.dart';
 import 'screens/results.dart';
 import 'screens/splash.dart';
+import 'screens/topic_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -74,15 +76,18 @@ class MyApp extends StatelessWidget {
               case CourseScreen.routeName:
                 final args = routeSettings.arguments as Language;
                 return CourseScreen(language: args);
+              case TopicScreen.routeName:
+                final args = routeSettings.arguments as Course;
+                return TopicScreen(course: args);
               case CourseTest.routeName:
                 final args = routeSettings.arguments as Question;
                 return CourseTest(question: args);
-              case LearnQuestion.routeName:
-                final args = routeSettings.arguments as Question;
-                return LearnQuestion(question: args);
               case QuestionListScreen.routeName:
-                final args = routeSettings.arguments as Course;
-                return QuestionListScreen(course: args);
+                final args = routeSettings.arguments as Topic;
+                return QuestionListScreen(topic: args);
+              case QuestionsOnly.routeName:
+                final args = routeSettings.arguments as Topic;
+                return QuestionsOnly(topic: args);
               case HomeScreen.routeName:
                 return const HomeScreen();
               case SplashScreen.routeName:

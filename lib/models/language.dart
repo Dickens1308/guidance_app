@@ -1,12 +1,14 @@
 class Language {
-  String? id;
-  String? title;
+  int id;
+  String title;
 
-  Language({this.id, this.title});
+  Language({required this.id, required this.title});
 
-  Language.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    id = json['id'].toString();
+  factory Language.fromJson(Map<String, dynamic> json) {
+    return Language(
+      id: json['id'],
+      title: json['title'],
+    );
   }
 
   Map<String, dynamic> toJson() {

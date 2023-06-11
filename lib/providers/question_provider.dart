@@ -101,15 +101,6 @@ class QuestionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  late Course _course;
-
-  Course get course => _course;
-
-  setCourse(Course value) {
-    _course = value;
-    notifyListeners();
-  }
-
   updateQuestionList(num id, Progress progress) {
     _questionList[_questionList.indexWhere((e) => e.id == id)]
         .progress!
@@ -121,7 +112,6 @@ class QuestionProvider extends ChangeNotifier {
   Future<bool> answerQuestionAndGoNext(
       BuildContext context, Question question) async {
     bool toReturn = false;
-    try {
       String answer = _choice == 0
           ? 'a'
           : _choice == 1
@@ -142,10 +132,7 @@ class QuestionProvider extends ChangeNotifier {
           (await getTokenPref()).toString(),
         );
 
-        if (response.contains("Successful saved the answer")) {
-          _course.progressCount = _course.progressCount! + 1;
-          setCourse(_course);
-
+        if (response.contains("saved")) {
           setLoading(false);
           loadingScreen(context);
           await Future.delayed(const Duration(milliseconds: 1300), () {
@@ -162,6 +149,7 @@ class QuestionProvider extends ChangeNotifier {
           print("Wrong answer");
         }
       }
+    try {
     } catch (e) {
       if (kDebugMode) {
         print(e);
