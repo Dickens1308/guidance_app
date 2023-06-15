@@ -8,10 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/course.dart';
-import '../models/language.dart';
 import '../models/topic.dart';
 import '../models/user.dart';
-import '../services/course_service.dart';
 import '../services/network_service.dart';
 import '../services/topic_service.dart';
 
@@ -49,18 +47,17 @@ class TopicProvider extends ChangeNotifier {
   }
 
   Future<void> getAllTopic(BuildContext context, num number) async {
-      setLoading(true);
-      if (await connectionState.checkConnection()) {
-        List<Topic> tempList = await topicService.getAllTopics(
-            context, number, (await getTokenPref()).toString());
-        setList(tempList);
+    setLoading(true);
+    if (await connectionState.checkConnection()) {
+      List<Topic> tempList = await topicService.getAllTopics(
+          context, number, (await getTokenPref()).toString());
+      setList(tempList);
 
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    try {
-    } catch (e) {
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+    try {} catch (e) {
       if (kDebugMode) {
         print(e);
       }

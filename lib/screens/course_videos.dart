@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../models/course.dart';
-import '../widgets/course_video_item.dart';
 
 class CourseVideo extends StatefulWidget {
   const CourseVideo({Key? key, required this.course}) : super(key: key);

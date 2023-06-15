@@ -112,7 +112,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
           ),
           child: Text(
             'Register',
-            style: Theme.of(context).textTheme.headline5!.merge(
+            style: Theme.of(context).textTheme.headlineSmall!.merge(
                   const TextStyle(color: Colors.white),
                 ),
           ),

@@ -26,7 +26,9 @@ class AuthService {
       print("Trying to login user $url");
     }
 
-    print(response.body);
+    if (kDebugMode) {
+      print(response.body);
+    }
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = await jsonDecode(response.body);

@@ -6,6 +6,7 @@ import '../providers/auth_provider.dart';
 import '../providers/course_provider.dart';
 import '../widgets/grid_tile_lan.dart';
 import '../widgets/screen_loader.dart';
+import 'recommends.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -37,6 +38,38 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<CourseProvider>(
       builder: (context, provider, child) {
         return Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Recommendations Books',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.pushNamed(
+                          context, RecommendationScreen.routeName),
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
           body: provider.loading
               ? const LoadingScreen()
               : provider.languageList.isEmpty

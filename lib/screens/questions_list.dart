@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../models/topic.dart';
 import '../providers/question_provider.dart';
+import '../widgets/course_video_item.dart';
 import '../widgets/screen_loader.dart';
-import 'learn_question.dart';
+import 'practical_screen.dart';
 
 class QuestionListScreen extends StatefulWidget {
   const QuestionListScreen({Key? key, required this.topic}) : super(key: key);
@@ -33,7 +34,6 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
           Provider.of<QuestionProvider>(context, listen: false);
 
       await provider.getAllQuestionById(context, widget.topic.id);
-      // await provider.setCourse(widget.topic);
     });
 
     Future.delayed(Duration.zero, () => topic = widget.topic);
@@ -62,13 +62,16 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
                           height: 50,
                           width: MediaQuery.of(context).size.width,
                           child: CupertinoButton(
-                            onPressed: () => Navigator.pushNamed(
-                              context,
-                              QuestionsOnly.routeName,
-                              arguments: topic,
-                            ),
+                            onPressed: () {
+
+                              Navigator.pushNamed(
+                                context,
+                                PracticalScreen.routeName,
+                                arguments: topic,
+                              );
+                            },
                             color: Theme.of(context).primaryColor,
-                            child: const Text("Continue to questions"),
+                            child: const Text("Continue to practise"),
                           ),
                         ),
                       ],
@@ -102,7 +105,10 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
           ),
         ),
         const SizedBox(height: 10),
-        if (topic!.videoUrl != null) const Text("Video Url here"),
+        if (topic!.videoUrl != null)
+          CourseVideoItem(
+            videoUrl: topic!.videoUrl!,
+          ),
         const SizedBox(height: 10),
         Text(
           '${topic!.learningDesc}',
@@ -112,60 +118,6 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        const SizedBox(height: 20),
-        if (topic!.learningDescSub != null)
-          Text(
-            '${topic!.learningDescSub}',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        const SizedBox(height: 20),
-        if (topic!.codeExample != null)
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Python code",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                '${topic!.codeExample}',
-                style: const TextStyle(
-                  color: Colors.green,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        const SizedBox(height: 20),
-        if (topic!.codeExplanation != null)
-          Text(
-            '${topic!.codeExplanation}',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        const SizedBox(height: 20),
-        if (topic!.codePractice != null)
-          Text(
-            '${topic!.codePractice}',
-            style: const TextStyle(
-              color: Colors.green,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
       ],
     );
   }

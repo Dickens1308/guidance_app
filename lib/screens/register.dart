@@ -45,146 +45,143 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               )
-            : SafeArea(
-                top: true,
-                child: Scaffold(
-                  backgroundColor: Colors.white,
-                  body: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height,
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, left: 10, right: 10),
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * .28,
-                              width: double.infinity,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: Image.asset(
-                                  'assets/images/WhatsApp Image 2023-05-15 at 09.23.27.jpeg',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+            : Scaffold(
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 10, left: 10, right: 10),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height * .28,
+                          width: double.infinity,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Image.asset(
+                              'assets/images/WhatsApp Image 2023-05-15 at 09.23.27.jpeg',
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * .68,
-                              decoration: BoxDecoration(
-                                color: Colors.deepOrange,
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Colors.lightBlueAccent,
-                                      Theme.of(context)
-                                          .primaryColor
-                                          .withOpacity(.7),
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 5, horizontal: 50),
-                                child: Form(
-                                  key: globalKey,
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 30),
-                                        child: Text(
-                                          'Welcome to',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .merge(
-                                                const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 10, bottom: 10),
-                                        child: Text(
-                                          'Children Career Guidance App',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyLarge!
-                                              .merge(
-                                                const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Based on Programming',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
-                                            .merge(
-                                              const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                      ),
-                                      const SizedBox(height: 40),
-                                      UsernameFieldForm(
-                                          controller: _usernameController,
-                                          focusNode: focusNodeU),
-                                      EmailFieldForm(
-                                          controller: _emailController,
-                                          focusNode: focusNodeE),
-                                      PasswordFieldForm(
-                                        controller: _passwordController,
-                                        viewPassword: viewPassword,
-                                        function: () {
-                                          setState(() {
-                                            viewPassword = !viewPassword;
-                                          });
-                                        },
-                                        focusNode: focusNodeP,
-                                      ),
-                                      const SizedBox(height: 20),
-                                      _buttonField(notifier),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 0,
-                            top: 230,
-                            child: Container(
-                              height: 100,
-                              width: 100,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(100),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * .68,
+                          decoration: BoxDecoration(
+                            color: Colors.deepOrange,
+                            gradient: LinearGradient(
+                                colors: [
+                                  Colors.lightBlueAccent,
+                                  Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(.7),
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 50),
+                            child: Form(
+                              key: globalKey,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 30),
+                                    child: Text(
+                                      'Welcome to',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .merge(
+                                            const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10),
+                                    child: Text(
+                                      'Children Career Guidance App',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .merge(
+                                            const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Based on Programming',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .merge(
+                                          const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                  ),
+                                  const SizedBox(height: 40),
+                                  UsernameFieldForm(
+                                      controller: _usernameController,
+                                      focusNode: focusNodeU),
+                                  EmailFieldForm(
+                                      controller: _emailController,
+                                      focusNode: focusNodeE),
+                                  PasswordFieldForm(
+                                    controller: _passwordController,
+                                    viewPassword: viewPassword,
+                                    function: () {
+                                      setState(() {
+                                        viewPassword = !viewPassword;
+                                      });
+                                    },
+                                    focusNode: focusNodeP,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  _buttonField(notifier),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        top: 245,
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(100),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              );
+              ),
+            );
       },
     );
   }

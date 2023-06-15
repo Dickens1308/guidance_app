@@ -13,8 +13,8 @@ import '../models/course.dart';
 import '../models/language.dart';
 import '../models/progress.dart';
 import '../models/question.dart';
+import '../models/report.dart';
 import '../models/result_model.dart';
-import '../providers/course_provider.dart';
 import '../providers/question_provider.dart';
 import '../screens/login.dart';
 
@@ -81,38 +81,35 @@ class CourseService {
 
     List<Course> courseList = [];
 
-      final response = await http.get(
-        uri,
-        headers: {
-          "accept": "application/json",
-          "Authorization": "Bearer $token"
-        },
-      );
+    final response = await http.get(
+      uri,
+      headers: {"accept": "application/json", "Authorization": "Bearer $token"},
+    );
 
+    if (kDebugMode) {
+      print(response.statusCode);
+    }
+
+    if (response.statusCode == 200) {
+      Iterable parsedListJson =
+          await (jsonDecode(response.body)["courses"]) as List;
+
+      List<Course> list =
+          parsedListJson.map((e) => Course.fromJson(e)).toList();
+
+      if (list.isNotEmpty) {
+        courseList.addAll(list);
+      }
+    } else if (response.statusCode == 401) {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString('app_user', '');
+      Navigator.pushNamedAndRemoveUntil(
+          context, LoginScreen.routeName, (route) => false);
+    } else {
       if (kDebugMode) {
-        print(response.statusCode);
+        print(response.body);
       }
-
-      if (response.statusCode == 200) {
-        Iterable parsedListJson =
-            await (jsonDecode(response.body)["courses"]) as List;
-
-        List<Course> list =
-            parsedListJson.map((e) => Course.fromJson(e)).toList();
-
-        if (list.isNotEmpty) {
-          courseList.addAll(list);
-        }
-      } else if (response.statusCode == 401) {
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setString('app_user', '');
-        Navigator.pushNamedAndRemoveUntil(
-            context, LoginScreen.routeName, (route) => false);
-      } else {
-        if (kDebugMode) {
-          print(response.body);
-        }
-      }
+    }
 
     return courseList;
   }
@@ -238,5 +235,50 @@ class CourseService {
       }
     }
     return '';
+  }
+
+  Future<Report?> getReport(BuildContext context, String token) async {
+    String url = Api.GET_REPORT;
+    Uri uri = Uri.parse(url);
+    if (kDebugMode) {
+      print('$url  $token');
+    }
+
+    try {
+      final response = await http.get(
+        uri,
+        headers: {
+          "accept": "application/json",
+          "Authorization": "Bearer $token"
+        },
+      );
+
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
+
+      if (response.statusCode == 200) {
+        final data = await (jsonDecode(response.body)["data"]);
+
+        Report report = Report.fromJson(data);
+
+        return report;
+      } else if (response.statusCode == 401) {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        preferences.setString('app_user', '');
+        Navigator.pushNamedAndRemoveUntil(
+            context, LoginScreen.routeName, (route) => false);
+      } else {
+        if (kDebugMode) {
+          print(response.body);
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+
+    return null;
   }
 }

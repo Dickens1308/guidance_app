@@ -8,7 +8,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/course.dart';
 import '../models/progress.dart';
 import '../models/question.dart';
 import '../models/result_model.dart';
@@ -112,45 +111,44 @@ class QuestionProvider extends ChangeNotifier {
   Future<bool> answerQuestionAndGoNext(
       BuildContext context, Question question) async {
     bool toReturn = false;
-      String answer = _choice == 0
-          ? 'a'
-          : _choice == 1
-              ? 'b'
-              : 'c';
+    String answer = _choice == 0
+        ? 'a'
+        : _choice == 1
+            ? 'b'
+            : 'c';
 
-      if (question.correctAnswer == answer) {
-        setWrong(false);
-        setLoading(true);
-        String response = await courseService.sendAnswer(
-          context,
-          question.id!,
-          _choice == 0
-              ? 'a'
-              : _choice == 1
-                  ? 'b'
-                  : 'c',
-          (await getTokenPref()).toString(),
-        );
+    if (question.correctAnswer == answer) {
+      setWrong(false);
+      setLoading(true);
+      String response = await courseService.sendAnswer(
+        context,
+        question.id!,
+        _choice == 0
+            ? 'a'
+            : _choice == 1
+                ? 'b'
+                : 'c',
+        (await getTokenPref()).toString(),
+      );
 
-        if (response.contains("saved")) {
-          setLoading(false);
-          loadingScreen(context);
-          await Future.delayed(const Duration(milliseconds: 1300), () {
-            Navigator.of(context).pop();
-            toReturn = true;
-          });
-        } else {
-          flutterToastFun(response, Colors.grey);
-          setLoading(false);
-        }
+      if (response.contains("saved")) {
+        setLoading(false);
+        loadingScreen(context);
+        await Future.delayed(const Duration(milliseconds: 1300), () {
+          Navigator.of(context).pop();
+          toReturn = true;
+        });
       } else {
-        setWrong(true);
-        if (kDebugMode) {
-          print("Wrong answer");
-        }
+        flutterToastFun(response, Colors.grey);
+        setLoading(false);
       }
-    try {
-    } catch (e) {
+    } else {
+      setWrong(true);
+      if (kDebugMode) {
+        print("Wrong answer");
+      }
+    }
+    try {} catch (e) {
       if (kDebugMode) {
         print(e);
       }

@@ -1,9 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../models/course.dart';
 import '../providers/course_provider.dart';
 import '../screens/course_videos.dart';
 import 'course_slider_item.dart';
@@ -21,6 +19,7 @@ class CourseSlider extends StatefulWidget {
 
 class _CourseSliderState extends State<CourseSlider> {
   CarouselController carouselController = CarouselController();
+
   // Course course = Course();
   int activeIndex = 0;
 

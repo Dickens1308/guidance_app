@@ -4,11 +4,10 @@ import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
 class CourseVideoItem extends StatefulWidget {
-  const CourseVideoItem({Key? key, required this.videoUrl, required this.index})
+  const CourseVideoItem({Key? key, required this.videoUrl})
       : super(key: key);
 
   final String videoUrl;
-  final int index;
 
   @override
   State<CourseVideoItem> createState() => _CourseVideoItemState();
@@ -35,7 +34,7 @@ class _CourseVideoItemState extends State<CourseVideoItem> {
       videoPlayerController: videoPlayerController!,
       aspectRatio: 16 / 9,
       autoInitialize: true,
-      autoPlay: widget.index == 0 ? true : false,
+      autoPlay: true,
       customControls: const CupertinoControls(
         backgroundColor: Color(0xff152238),
         iconColor: Colors.white,

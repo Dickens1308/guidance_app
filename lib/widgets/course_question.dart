@@ -36,29 +36,35 @@ class CourseQuestion extends StatelessWidget {
                 ),
               ),
               if (question.codeImageUrl != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       Text(
-                        'Python Code',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 20,
-
+                Container(
+                  margin: const EdgeInsets.only(left: 15, right: 15, top: 20),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(.7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Exercise Code',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        '${question.codeImageUrl}',
-                        style: const TextStyle(
-                          color: Colors.green,
-                          fontSize: 20,
-
+                        const SizedBox(height: 10),
+                        Text(
+                          '${question.codeImageUrl}',
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               const SizedBox(height: 30),

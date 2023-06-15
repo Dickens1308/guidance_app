@@ -8,7 +8,6 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../models/course.dart';
-import '../providers/course_provider.dart';
 import '../providers/topic_provider.dart';
 import '../widgets/dots_widget.dart';
 import '../widgets/screen_loader.dart';
@@ -59,15 +58,15 @@ class _TopicScreenState extends State<TopicScreen> {
                         children: [
                           count != provider.list.length
                               ? SvgPicture.asset(
-                            'assets/svg/achievement-challenge-medal-svgrepo-com.svg',
-                            height: size.height * .25,
-                            width: size.width,
-                            // color: Colors.white70,
-                          )
+                                  'assets/svg/achievement-challenge-medal-svgrepo-com.svg',
+                                  height: size.height * .25,
+                                  width: size.width,
+                                  // color: Colors.white70,
+                                )
                               : Lottie.asset(
-                            'assets/json/59344-congratulation-badge-animation.json',
-                            height: size.height * .25,
-                          ),
+                                  'assets/json/59344-congratulation-badge-animation.json',
+                                  height: size.height * .25,
+                                ),
                           if (count != provider.list.length)
                             Positioned(
                               right: 90,

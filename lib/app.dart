@@ -12,9 +12,13 @@ import 'screens/course_videos.dart';
 import 'screens/home.dart';
 import 'screens/login.dart';
 import 'screens/parent_home.dart';
+import 'screens/practical_screen.dart';
+import 'screens/python_future.dart';
 import 'screens/questions_list.dart';
+import 'screens/recommends.dart';
 import 'screens/register.dart';
 import 'screens/register_student.dart';
+import 'screens/report_screen.dart';
 import 'screens/reset_password.dart';
 import 'screens/results.dart';
 import 'screens/splash.dart';
@@ -65,6 +69,11 @@ class MyApp extends StatelessWidget {
                 return const ResetPassword();
               case ParentHome.routeName:
                 return const ParentHome();
+              case RecommendationScreen.routeName:
+                return RecommendationScreen();
+              case FutureScreen.routeName:
+                final args = routeSettings.arguments as Language;
+                return FutureScreen(language: args);
               case RegisterStudent.routeName:
                 return const RegisterStudent();
               case ResultScreen.routeName:
@@ -88,6 +97,11 @@ class MyApp extends StatelessWidget {
               case QuestionsOnly.routeName:
                 final args = routeSettings.arguments as Topic;
                 return QuestionsOnly(topic: args);
+              case ReportScreen.routeName:
+                return const ReportScreen();
+              case PracticalScreen.routeName:
+                final args = routeSettings.arguments as Topic;
+                return PracticalScreen(topic: args);
               case HomeScreen.routeName:
                 return const HomeScreen();
               case SplashScreen.routeName:

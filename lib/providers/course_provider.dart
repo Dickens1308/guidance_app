@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:guidance/models/report.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/course.dart';
@@ -71,18 +72,17 @@ class CourseProvider extends ChangeNotifier {
   }
 
   Future<void> getAllCourse(BuildContext context, num number) async {
-      setLoading(true);
-      if (await connectionState.checkConnection()) {
-        List<Course> tempList = await courseService.getAllCourse(
-            context, number, (await getTokenPref()).toString());
-        setList(tempList);
+    setLoading(true);
+    if (await connectionState.checkConnection()) {
+      List<Course> tempList = await courseService.getAllCourse(
+          context, number, (await getTokenPref()).toString());
+      setList(tempList);
 
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    try {
-    } catch (e) {
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+    try {} catch (e) {
       if (kDebugMode) {
         print(e);
       }
@@ -112,5 +112,31 @@ class CourseProvider extends ChangeNotifier {
       textColor: Colors.white,
       fontSize: 16.0,
     );
+  }
+
+  //Progress
+  Report? _report;
+
+  Report? get report => _report;
+
+  set report(Report? value) {
+    _report = value;
+    notifyListeners();
+  }
+
+  Future<void> getReport(BuildContext context) async {
+    setLoading(true);
+    if (await connectionState.checkConnection()) {
+      Report? r = await courseService.getReport(
+          context, (await getTokenPref()).toString());
+
+      if (r != null) {
+        report = r;
+      }
+
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
   }
 }

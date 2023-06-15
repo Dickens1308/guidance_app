@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../models/language.dart';
@@ -24,7 +25,7 @@ class GridTileLan extends StatelessWidget {
         arguments: language,
       ),
       child: Container(
-        height: size.height * .02,
+        height: size.height * .022,
         width: size.width * .3,
         decoration: BoxDecoration(
           color: Colors.white70,
@@ -33,19 +34,25 @@ class GridTileLan extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Icon(
-              language.title == 'Python'
-                  ? Ionicons.logo_python
-                  : language.title == 'Ruby'
-                      ? Ionicons.logo_nodejs
-                      : Ionicons.logo_tableau,
-              size: 40,
-            ),
+            if (language.id != 3)
+              SvgPicture.asset(
+                language.id == 1
+                    ? "assets/svg/Python-logo-notext.svg"
+                    : "assets/svg/Ruby_logo.svg",
+                height: 80,
+                width: 80,
+              ),
+            if (language.id == 3)
+              Image.asset(
+                "assets/svg/Scratch.logo.S.png",
+                height: 90,
+                width: 90,
+              ),
             Text(
-              "${language.title}",
+              language.title,
               style: const TextStyle(
                 fontWeight: FontWeight.w600,
-                fontSize: 24,
+                fontSize: 20,
               ),
             ),
           ],

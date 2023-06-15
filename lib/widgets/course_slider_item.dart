@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:guidance/models/course.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import '../screens/course_test.dart';
-import '../screens/results.dart';
 
 class CourseSliderItem extends StatelessWidget {
   const CourseSliderItem({Key? key, required this.course}) : super(key: key);
@@ -56,7 +52,7 @@ class CourseSliderItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 5, right: 5),
                 child: Text(
-                  course.title!,
+                  course.title,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.roboto(
                     textStyle: const TextStyle(

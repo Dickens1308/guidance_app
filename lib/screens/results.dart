@@ -26,7 +26,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final provider = Provider.of<QuestionProvider>(context, listen: false);
-      provider.getAllResultById(context, widget.course.id!);
+      provider.getAllResultById(context, widget.course.id);
     });
   }
 

@@ -11,6 +11,8 @@ import '../models/language.dart';
 import '../providers/course_provider.dart';
 import '../widgets/dots_widget.dart';
 import '../widgets/screen_loader.dart';
+import 'python_future.dart';
+import 'recommends.dart';
 import 'topic_screen.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -49,6 +51,39 @@ class _CourseScreenState extends State<CourseScreen> {
           : Scaffold(
               appBar: AppBar(
                 elevation: 0,
+                title: Text(widget.language.title),
+              ),
+              bottomNavigationBar: BottomAppBar(
+                child: Container(
+                        height: 50,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                               Text(
+                                '${widget.language.title} Career',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () => Navigator.pushNamed(
+                                    context, FutureScreen.routeName, arguments: widget.language),
+                                icon: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
               ),
               body: SingleChildScrollView(
                 child: Column(
@@ -212,45 +247,5 @@ class _CourseScreenState extends State<CourseScreen> {
         backgroundColor: Theme.of(context).primaryColor,
       );
     }
-
-    // if (index > 0) {
-    //   Course courseCheck = provider.list[index - 1];
-    //   if (courseCheck.progressCount == courseCheck.questionCount) {
-    //     dynamic value = await Navigator.pushNamed(
-    //         context, QuestionListScreen.routeName,
-    //         arguments: course);
-    //
-    //     if (kDebugMode) {
-    //       print("Pop screen value is $value");
-    //     }
-    //     if (value != null && value == true) {
-    //       // ignore: use_build_context_synchronously
-    //       Provider.of<CourseProvider>(context, listen: false)
-    //           .getAllCourse(context, num.parse(widget.language.id!));
-    //
-    //       setState(() {});
-    //     }
-    //   } else {
-    //     Fluttertoast.showToast(
-    //       msg: "Finish the previous course before learning new course",
-    //       backgroundColor: Theme.of(context).primaryColor,
-    //     );
-    //   }
-    // } else {
-    //   dynamic value = await Navigator.pushNamed(
-    //       context, QuestionListScreen.routeName,
-    //       arguments: course);
-    //
-    //   if (kDebugMode) {
-    //     print("Pop screen value is $value");
-    //   }
-    //   if (value != null && value == true) {
-    //     // ignore: use_build_context_synchronously
-    //     Provider.of<CourseProvider>(context, listen: false)
-    //         .getAllCourse(context, num.parse(widget.language.id!));
-    //     countAllCourseCompleted(provider);
-    //     setState(() {});
-    //   }
-    // }
   }
 }

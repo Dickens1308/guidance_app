@@ -2,7 +2,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
@@ -20,7 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController(text: 'dickens.anthony@gmail.com');
+  final _emailController =
+      TextEditingController(text: 'dickens.anthony@gmail.com');
   final _passwordController = TextEditingController(text: 'password');
 
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
@@ -235,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Positioned(
                             left: 0,
-                            top: 220,
+                            top: 245,
                             child: Container(
                               height: 90,
                               width: 100,

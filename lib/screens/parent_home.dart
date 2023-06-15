@@ -3,8 +3,8 @@ import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
-import '../providers/course_provider.dart';
 import 'register_student.dart';
+import 'report_screen.dart';
 
 class ParentHome extends StatefulWidget {
   const ParentHome({Key? key}) : super(key: key);
@@ -20,74 +20,46 @@ class _ParentHomeState extends State<ParentHome> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Consumer<CourseProvider>(
-      builder: (context, provider, child) {
-        return provider.loading
-            ? Scaffold(
-                body: SizedBox(
-                  height: size.height,
-                  width: size.width,
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(color: Colors.white),
-                        SizedBox(height: 20),
-                        Text(
-                          'please wait ...',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              )
-            : Scaffold(
-                appBar: AppBar(
-                  title: const Text('Parent Home'),
-                  elevation: 0,
-                  actions: [
-                    IconButton(
-                      onPressed: () =>
-                          Provider.of<AuthProvider>(context, listen: false)
-                              .logOutUser(context),
-                      icon: const Icon(
-                        Ionicons.log_in_outline,
-                        size: 30,
-                      ),
-                    )
-                  ],
-                ),
-                body: SizedBox(
-                  width: size.width,
-                  height: size.height,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DashboardTile(
-                          size: size,
-                          function: () {
-                            Navigator.pushNamed(
-                                context, RegisterStudent.routeName);
-                          },
-                          title: 'Add Student',
-                          iconData: Icons.person),
-                      const SizedBox(height: 50),
-                      DashboardTile(
-                          size: size,
-                          function: () {},
-                          title: 'Request report',
-                          iconData: Icons.bar_chart),
-                    ],
-                  ),
-                ),
-              );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Parent Home'),
+        elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () => Provider.of<AuthProvider>(context, listen: false)
+                .logOutUser(context),
+            icon: const Icon(
+              Ionicons.log_in_outline,
+              size: 30,
+            ),
+          )
+        ],
+      ),
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DashboardTile(
+                size: size,
+                function: () {
+                  Navigator.pushNamed(context, RegisterStudent.routeName);
+                },
+                title: 'Add Student',
+                iconData: Icons.person),
+            const SizedBox(height: 50),
+            DashboardTile(
+                size: size,
+                function: () {
+                  Navigator.pushNamed(context, ReportScreen.routeName);
+                },
+                title: 'View report',
+                iconData: Icons.bar_chart),
+          ],
+        ),
+      ),
     );
   }
 }
