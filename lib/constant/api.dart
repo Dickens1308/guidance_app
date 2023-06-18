@@ -1,8 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 class Api {
-  static const BASE = 'http://172.16.36.138:8000/api/v1';
-  // static const BASE = 'http://192.168.155.122:8000/api/v1';
+  // static const BASE = 'http://172.16.36.138:8000/api/v1';
+  static const BASE = 'http://192.168.2.1:8000/api/v1';
 
   static const GET_ALL_COURSES = '$BASE/language/courses';
   static const GET_ALL_TOPICS = '$BASE/language/topics';

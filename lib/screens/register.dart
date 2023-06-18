@@ -165,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       Positioned(
                         left: 0,
-                        top: 245,
+                        top: MediaQuery.of(context).size.height * .31,
                         child: Container(
                           height: 100,
                           width: 100,
