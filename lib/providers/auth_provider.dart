@@ -154,7 +154,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> registerStudent(String username, String email, String password,
+  Future<void> registerStudent(String username, String email, String password,String age,
       BuildContext context) async {
     setIsLoading(true);
 
@@ -174,7 +174,7 @@ class AuthProvider extends ChangeNotifier {
       }
 
       AppUser? appUser = isConnected
-          ? await authService.signUpStudent(username, email, password,
+          ? await authService.signUpStudent(username, email, password,age,
               (await getAppUserFromSharePref())!.token.toString())
           : null;
       if (kDebugMode) {

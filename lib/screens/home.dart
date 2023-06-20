@@ -155,24 +155,24 @@ class _HomeScreenState extends State<HomeScreen> {
       height: size.height * .08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Welcome,',
-                style: Theme.of(context).textTheme.bodyLarge!.merge(
-                      const TextStyle(
-                        color: Colors.white60,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                '${provider.appUser!.user!.name}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
               ),
               Text(
-                '${provider.appUser!.user!.name}',
-                style: Theme.of(context).textTheme.headlineSmall!.merge(
+                '${provider.appUser!.user!.age} Years Old',
+                style: Theme.of(context).textTheme.bodyLarge!.merge(
                       const TextStyle(
-                        color: Colors.white,
+                        color: Colors.white70,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

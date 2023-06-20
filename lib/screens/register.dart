@@ -102,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           .merge(
                                             const TextStyle(
                                               color: Colors.white,
-                                              fontSize: 18,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -119,7 +119,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           .merge(
                                             const TextStyle(
                                               color: Colors.white,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -133,7 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         .merge(
                                           const TextStyle(
                                             color: Colors.white,
-                                            fontSize: 20,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),

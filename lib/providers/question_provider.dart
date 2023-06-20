@@ -111,16 +111,14 @@ class QuestionProvider extends ChangeNotifier {
   Future<bool> answerQuestionAndGoNext(
       BuildContext context, Question question) async {
     bool toReturn = false;
-    String answer = _choice == 0
-        ? 'a'
-        : _choice == 1
-            ? 'b'
-            : 'c';
+    try {
+      String answer = _choice == 0
+          ? 'a'
+          : _choice == 1
+              ? 'b'
+              : 'c';
 
-    if (question.correctAnswer == answer) {
-      setWrong(false);
-      setLoading(true);
-      String response = await courseService.sendAnswer(
+      await courseService.sendAnswer(
         context,
         question.id!,
         _choice == 0
@@ -131,24 +129,25 @@ class QuestionProvider extends ChangeNotifier {
         (await getTokenPref()).toString(),
       );
 
-      if (response.contains("saved")) {
+      if (question.correctAnswer == answer) {
+        setWrong(false);
+        setLoading(true);
+
         setLoading(false);
         loadingScreen(context);
         await Future.delayed(const Duration(milliseconds: 1300), () {
           Navigator.of(context).pop();
+          Navigator.of(context).pop();
           toReturn = true;
         });
       } else {
-        flutterToastFun(response, Colors.grey);
-        setLoading(false);
+        setWrong(true);
+        if (kDebugMode) {
+          print("Wrong answer");
+        }
       }
-    } else {
-      setWrong(true);
-      if (kDebugMode) {
-        print("Wrong answer");
-      }
-    }
-    try {} catch (e) {
+      toReturn = false;
+    } catch (e) {
       if (kDebugMode) {
         print(e);
       }

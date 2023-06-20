@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               .merge(
                                                 const TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 18,
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               .merge(
                                                 const TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             .merge(
                                               const TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 20,
+                                                fontSize: 16,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),

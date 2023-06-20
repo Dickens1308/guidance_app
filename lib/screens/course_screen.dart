@@ -12,7 +12,6 @@ import '../providers/course_provider.dart';
 import '../widgets/dots_widget.dart';
 import '../widgets/screen_loader.dart';
 import 'python_future.dart';
-import 'recommends.dart';
 import 'topic_screen.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -55,35 +54,36 @@ class _CourseScreenState extends State<CourseScreen> {
               ),
               bottomNavigationBar: BottomAppBar(
                 child: Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15, right: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                               Text(
-                                '${widget.language.title} Career',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () => Navigator.pushNamed(
-                                    context, FutureScreen.routeName, arguments: widget.language),
-                                icon: const Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                ),
-                              )
-                            ],
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  decoration:
+                      BoxDecoration(color: Theme.of(context).primaryColor),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${widget.language.title} Career',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                      ),
+                        IconButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, FutureScreen.routeName,
+                              arguments: widget.language),
+                          icon: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ),
               body: SingleChildScrollView(
                 child: Column(
@@ -129,6 +129,7 @@ class _CourseScreenState extends State<CourseScreen> {
                           bool isCompleted = false;
                           bool inProgress = false;
                           bool isPrevCompleted = false;
+                          bool noQuestion = false;
 
                           if (course.progressCount == course.topicsCount) {
                             isCompleted = true;
@@ -141,13 +142,18 @@ class _CourseScreenState extends State<CourseScreen> {
                             }
                           }
 
+                          if ((course.topicsCount - course.progressCount) <=
+                              1) {
+                            noQuestion = true;
+                          }
+
                           if (course.progressCount > 0) {
                             inProgress = true;
                           }
 
                           return GestureDetector(
                             onTap: () => courseFun(index, provider, course,
-                                isPrevCompleted, inProgress),
+                                isPrevCompleted, inProgress, noQuestion),
                             child: Column(
                               children: [
                                 const SizedBox(height: 10),
@@ -155,7 +161,7 @@ class _CourseScreenState extends State<CourseScreen> {
                                   decoration: BoxDecoration(
                                     color: (index == 0 ||
                                             inProgress ||
-                                            isPrevCompleted)
+                                            isPrevCompleted || noQuestion)
                                         ? isCompleted
                                             ? Colors.deepPurpleAccent
                                                 .withOpacity(.2)
@@ -175,7 +181,7 @@ class _CourseScreenState extends State<CourseScreen> {
                                     child: Icon(
                                       (inProgress ||
                                               index == 0 ||
-                                              isPrevCompleted)
+                                              isPrevCompleted || noQuestion)
                                           ? isCompleted
                                               ? Ionicons.checkmark
                                               : Ionicons.flash
@@ -233,8 +239,9 @@ class _CourseScreenState extends State<CourseScreen> {
     }
   }
 
-  void courseFun(index, provider, course, isCompleted, inProgress) async {
-    if (index == 0 || inProgress || isCompleted) {
+  void courseFun(
+      index, provider, course, isCompleted, inProgress, noQuestion) async {
+    if (index == 0 || inProgress || isCompleted || noQuestion) {
       await Navigator.pushNamed(context, TopicScreen.routeName,
               arguments: course)
           .then((value) async {

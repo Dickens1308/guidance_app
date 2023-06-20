@@ -71,6 +71,29 @@ class CourseProvider extends ChangeNotifier {
     }
   }
 
+  final List<User> _userList = [];
+
+  List<User> get userList => _userList;
+
+  set userList(List<User> value) {
+    _userList.clear();
+    _userList.addAll(value);
+    notifyListeners();
+  }
+
+  Future<void> getAllChildren(BuildContext context) async {
+    setLoading(true);
+    if (await connectionState.checkConnection()) {
+      List<User> tempList = await courseService.getAllChildren(
+          context, (await getTokenPref()).toString());
+
+      userList = tempList;
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
+  }
+
   Future<void> getAllCourse(BuildContext context, num number) async {
     setLoading(true);
     if (await connectionState.checkConnection()) {
@@ -124,11 +147,11 @@ class CourseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getReport(BuildContext context) async {
+  Future<void> getReport(BuildContext context, num childId) async {
     setLoading(true);
     if (await connectionState.checkConnection()) {
       Report? r = await courseService.getReport(
-          context, (await getTokenPref()).toString());
+          context, (await getTokenPref()).toString(), childId);
 
       if (r != null) {
         report = r;

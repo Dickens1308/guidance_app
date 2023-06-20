@@ -96,7 +96,7 @@ class AuthService {
   }
 
   Future<AppUser?> signUpStudent(
-      String username, String email, String password, String? token) async {
+      String username, String email, String password,String age, String? token) async {
     String url = Api.REGISTER_STUDENT;
     Uri uri = Uri.parse(url);
 
@@ -111,6 +111,7 @@ class AuthService {
         'username': username,
         'email': email,
         'password': password,
+        'age': age,
       },
     );
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/auth_provider.dart';
+import '../widgets/age_field.dart';
 import '../widgets/email_field.dart';
 import '../widgets/password_field.dart';
 import '../widgets/username_field.dart';
@@ -22,9 +23,11 @@ class _RegisterStudentState extends State<RegisterStudent> {
   final _emailController =
       TextEditingController(text: 'dickens.anthony@gmail.com');
   final _passwordController = TextEditingController(text: 'password');
+  final _ageController = TextEditingController(text: '12');
 
   final focusNodeU = FocusNode();
   final focusNodeE = FocusNode();
+  final focusNodeA = FocusNode();
   final focusNodeP = FocusNode();
 
   GlobalKey<FormState> globalKey = GlobalKey<FormState>();
@@ -65,6 +68,11 @@ class _RegisterStudentState extends State<RegisterStudent> {
                               focusNode: focusNodeE,
                             ),
                             const SizedBox(height: 10),
+                            AgeFieldForm(
+                              controller: _ageController,
+                              focusNode: focusNodeA,
+                            ),
+                            const SizedBox(height: 10),
                             PasswordFieldForm(
                               controller: _passwordController,
                               viewPassword: viewPassword,
@@ -103,6 +111,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                 _usernameController.text,
                 _emailController.text,
                 _passwordController.text,
+                _ageController.text,
                 context,
               );
             }

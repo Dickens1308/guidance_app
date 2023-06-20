@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:guidance/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,6 +49,57 @@ class CourseService {
 
         List<Language> list2 =
             parsedListJson2.map((e) => Language.fromJson(e)).toList();
+
+        if (list2.isNotEmpty) {
+          list.addAll(list2);
+        }
+      } else if (response.statusCode == 401) {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        preferences.setString('app_user', '');
+        Navigator.pushNamedAndRemoveUntil(
+            context, LoginScreen.routeName, (route) => false);
+      } else {
+        if (kDebugMode) {
+          print(response.body);
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+
+    return list;
+  }
+
+  Future<List<User>> getAllChildren(BuildContext context, String token) async {
+    String url = Api.GET_CHILDREN;
+    Uri uri = Uri.parse(url);
+    if (kDebugMode) {
+      print('$url  $token');
+    }
+
+    List<User> list = [];
+
+    try {
+      final response = await http.get(
+        uri,
+        headers: {
+          "accept": "application/json",
+          "Authorization": "Bearer $token"
+        },
+      );
+
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
+
+      if (response.statusCode == 200) {
+        Iterable parsedListJson2 =
+            await (jsonDecode(response.body)["children"]) as List;
+
+        List<User> list2 =
+            parsedListJson2.map((e) => User.fromJson(e)).toList();
 
         if (list2.isNotEmpty) {
           list.addAll(list2);
@@ -237,8 +289,9 @@ class CourseService {
     return '';
   }
 
-  Future<Report?> getReport(BuildContext context, String token) async {
-    String url = Api.GET_REPORT;
+  Future<Report?> getReport(
+      BuildContext context, String token, num childId) async {
+    String url = "${Api.GET_REPORT}/$childId";
     Uri uri = Uri.parse(url);
     if (kDebugMode) {
       print('$url  $token');
