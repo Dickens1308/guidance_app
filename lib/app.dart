@@ -12,6 +12,7 @@ import 'screens/course_videos.dart';
 import 'screens/home.dart';
 import 'screens/login.dart';
 import 'screens/parent_home.dart';
+import 'screens/practical_idea.dart';
 import 'screens/practical_screen.dart';
 import 'screens/python_future.dart';
 import 'screens/questions_list.dart';
@@ -102,6 +103,9 @@ class MyApp extends StatelessWidget {
               case PracticalScreen.routeName:
                 final args = routeSettings.arguments as Topic;
                 return PracticalScreen(topic: args);
+              case PracticalIDE.routeName:
+                final args = routeSettings.arguments as Topic;
+                return PracticalIDE(topic: args);
               case HomeScreen.routeName:
                 return const HomeScreen();
               case SplashScreen.routeName:

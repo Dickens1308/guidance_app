@@ -8,6 +8,7 @@ import '../models/topic.dart';
 import '../providers/question_provider.dart';
 import '../widgets/screen_loader.dart';
 import 'learn_question.dart';
+import 'practical_idea.dart';
 
 class PracticalScreen extends StatefulWidget {
   const PracticalScreen({Key? key, required this.topic}) : super(key: key);
@@ -60,11 +61,29 @@ class _PracticalScreenState extends State<PracticalScreen> {
                           child: CupertinoButton(
                             onPressed: () => Navigator.pushNamed(
                               context,
-                              QuestionsOnly.routeName,
+                              PracticalIDE.routeName,
                               arguments: topic,
                             ),
                             color: Theme.of(context).primaryColor,
-                            child: const Text("Continue to questions"),
+                            child: const Text("Continue to Test"),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          height: 45,
+                          width: MediaQuery.of(context).size.width,
+                          child: OutlinedButton(
+                            onPressed: () => Navigator.pushNamed(
+                              context,
+                              QuestionsOnly.routeName,
+                              arguments: topic,
+                            ),
+                            style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                side: const BorderSide(
+                                  color: Colors.white,
+                                )),
+                            child: const Text("Skip Test"),
                           ),
                         ),
                       ],
@@ -135,25 +154,25 @@ class _PracticalScreenState extends State<PracticalScreen> {
             ),
           ),
         const SizedBox(height: 20),
-        if (topic!.codePractice != null)
-          Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(.7),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                '${topic!.codePractice}',
-                style: const TextStyle(
-                  color: Colors.green,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
+        // if (topic!.codePractice != null)
+        //   Container(
+        //     width: MediaQuery.of(context).size.width,
+        //     decoration: BoxDecoration(
+        //       color: Colors.black.withOpacity(.7),
+        //       borderRadius: BorderRadius.circular(10),
+        //     ),
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(15.0),
+        //       child: Text(
+        //         '${topic!.codePractice}',
+        //         style: const TextStyle(
+        //           color: Colors.green,
+        //           fontSize: 18,
+        //           fontWeight: FontWeight.w500,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
       ],
     );
   }

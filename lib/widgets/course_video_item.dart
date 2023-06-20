@@ -34,7 +34,7 @@ class _CourseVideoItemState extends State<CourseVideoItem> {
       videoPlayerController: videoPlayerController!,
       aspectRatio: 16 / 9,
       autoInitialize: true,
-      autoPlay: true,
+      autoPlay: false,
       customControls: const CupertinoControls(
         backgroundColor: Color(0xff152238),
         iconColor: Colors.white,

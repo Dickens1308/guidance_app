@@ -15,6 +15,17 @@ class Topic {
   int questionCount;
   int progressCount;
 
+  String? codeFirstLine;
+  String? codeSecondLine;
+  String? codeThirdLine;
+  String? codeFourthLine;
+  String? codeFifthLine;
+  String? codeSixLine;
+  String? codeSevenLine;
+  String? codeEightLine;
+  String? codeNineLine;
+  String? codeTenLine;
+
   Topic({
     required this.id,
     required this.title,
@@ -31,6 +42,16 @@ class Topic {
     required this.updatedAt,
     required this.questionCount,
     required this.progressCount,
+    this.codeFirstLine,
+    this.codeSecondLine,
+    this.codeThirdLine,
+    this.codeFourthLine,
+    this.codeFifthLine,
+    this.codeSixLine,
+    this.codeSevenLine,
+    this.codeEightLine,
+    this.codeNineLine,
+    this.codeTenLine,
   });
 
   factory Topic.fromJson(Map<String, dynamic> json) {
@@ -50,6 +71,16 @@ class Topic {
       updatedAt: DateTime.parse(json['updated_at']),
       questionCount: json['questions_count'],
       progressCount: json['progress_count'],
+      codeFirstLine: json["code_first_line"],
+      codeSecondLine: json["code_second_line"],
+      codeThirdLine: json["code_third_line"],
+      codeFourthLine: json["code_fourth_line"],
+      codeFifthLine: json["code_fifth_line"],
+      codeSixLine: json["code_six_line"],
+      codeSevenLine: json["code_seven_line"],
+      codeEightLine: json["code_eight_line"],
+      codeNineLine: json["code_nine_line"],
+      codeTenLine: json["code_ten_line"],
     );
   }
 }

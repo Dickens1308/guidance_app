@@ -22,9 +22,9 @@ class AgeFieldForm extends StatelessWidget {
           keyboardType: TextInputType.text,
           controller: controller,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (input) => int.parse(input!) <= 0
-              ? "Age cannot bel less than 1"
-              : null,
+          // validator: (input) => int.parse(input!) <= 0
+          //     ? "Age cannot bel less than 1"
+          //     : null,
           style: const TextStyle(
             color: Colors.white,
           ),

@@ -8,6 +8,7 @@ import '../models/topic.dart';
 import '../providers/question_provider.dart';
 import '../widgets/course_video_item.dart';
 import '../widgets/screen_loader.dart';
+import 'learn_question.dart';
 import 'practical_screen.dart';
 
 class QuestionListScreen extends StatefulWidget {
@@ -63,12 +64,19 @@ class _QuestionListScreenState extends State<QuestionListScreen> {
                           width: MediaQuery.of(context).size.width,
                           child: CupertinoButton(
                             onPressed: () {
-
-                              Navigator.pushNamed(
-                                context,
-                                PracticalScreen.routeName,
-                                arguments: topic,
-                              );
+                              if (topic!.codeExample != null) {
+                                Navigator.pushNamed(
+                                  context,
+                                  PracticalScreen.routeName,
+                                  arguments: topic,
+                                );
+                              } else {
+                                Navigator.pushNamed(
+                                  context,
+                                  QuestionsOnly.routeName,
+                                  arguments: topic,
+                                );
+                              }
                             },
                             color: Theme.of(context).primaryColor,
                             child: const Text("Continue to practise"),
